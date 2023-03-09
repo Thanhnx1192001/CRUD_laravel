@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FormRequestAdmin;
 use App\Models\StaffList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,13 +40,13 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormRequestAdmin $FormRequestAdmin)
     {
         //
         $StaffList = new StaffList();
-        $StaffList->fullName = $request->fullName;
-        $StaffList->email = $request->email;
-        $StaffList->position = $request->position;
+        $StaffList->fullName = $FormRequestAdmin->fullName;
+        $StaffList->email = $FormRequestAdmin->email;
+        $StaffList->position = $FormRequestAdmin->position;
 
         $StaffList->save();
         return redirect()->action([AdminController::class, 'index']);
@@ -82,13 +83,13 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FormRequestAdmin $FormRequestAdmin, $id)
     {
         //
         $StaffList = StaffList::find($id);
-        $StaffList->fullName = $request->fullName;
-        $StaffList->email = $request->email;
-        $StaffList->position = $request->position;
+        $StaffList->fullName = $FormRequestAdmin->fullName;
+        $StaffList->email = $FormRequestAdmin->email;
+        $StaffList->position = $FormRequestAdmin->position;
 
         $StaffList->save();
         return redirect()->action([AdminController::class, 'index']);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::middleware(['auth'])->group(function () {
 Route::get('/CRUD/create', [AdminController::class, 'create']);
 
 Route::PATCH('/CRUD/store', [AdminController::class, 'store']);
@@ -33,4 +34,13 @@ Route::patch('/CRUD/update/{id}', [AdminController::class, 'update']);
 Route::DELETE('/CRUD/delete/{id}', [AdminController::class, 'destroy']);
 
 Route::get('/CRUD/search', [AdminController::class, 'search']);
+});
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

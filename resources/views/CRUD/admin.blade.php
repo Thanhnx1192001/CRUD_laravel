@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+
 <form action="/CRUD/search" method="get">
     <input type="text" name="search" placeholder="Tìm kiếm nhân viên...">
     <button type="submit">Tìm kiếm</button>
